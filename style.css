@@ -1,8 +1,37 @@
-h1{
-    color: white;
-    border: 50px;
+h1 {
     margin: 0;
-    padding: 0;
-    background-color: black;
-    text-align: center;
+    color: white;
+    
+}
+#header {
+
+float: top;
+background-color: black;
+text-align: center;
+padding: 25px;
+height: 20px;
+
+}
+
+#elements{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: lightgray;
+}
+
+#bank{
+    
+    height: 200px;
+    width: 200px;
+
+
+}
+
+#loan-btn {
+    margin-top: 50px;
+}
+
+#bank-btn{
+    margin-top: 50px;
 }

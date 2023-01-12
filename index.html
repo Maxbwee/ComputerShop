@@ -10,16 +10,38 @@
 <body>
     <!-- The header for the webpage -->
     <header>
-        <div id="header">
+        <div id='header'>
             <h1>Computer Store</h1>
         </div>
     </header>
+
+    <div id='elements'>
+        <div id='bank'>
+            <h2>Joe Banker</h2>
+                <label> Balance </label>
+                <label id="bank-balance"> 0€</label>
+                <br/>
+            <button id="loan-btn">Get a loan</button>
+        </div>
+    
+        <div id='work'>
+            <h2>Work</h2>
+            <label >Pay</label>
+            <label id="work-balance"> 0€</label>
+            <br/>
+            <button id="bank-btn">Bank</button>
+            <button id="work-btn">Work</button>
+        </div>
+
+        <div id='laptop'>
+            <h2>Laptops</h2>
+            <select name="laptops" id="laptops">
+            </select>
+        </div>
+    </div>
     
 
-    <p>
-        Hello
-    </p>
-
+        
 <script src="app.js"></script>
 </body>
 </html>
