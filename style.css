@@ -24,8 +24,6 @@ height: 20px;
     
     height: 200px;
     width: 200px;
-
-
 }
 
 #loan-btn {
@@ -34,4 +32,22 @@ height: 20px;
 
 #bank-btn{
     margin-top: 50px;
+}
+
+#infoSection {
+ padding: 2em;
+ margin: 100px;
+ border: 2px;
+ border-radius: 25px;
+ background-color: lightgray;
+
+}
+
+#laptop-price{
+    float:right;
+    
+}
+
+#buy-btn{
+    float:right;
 }
