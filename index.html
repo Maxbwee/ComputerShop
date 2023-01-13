@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>Computer Store</title>
-
+    <!-- Linking the CSS file for the webpage -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,7 +14,10 @@
             <h1>Computer Store</h1>
         </div>
     </header>
-
+    <!--
+        This div element contains the 3 elements at the top of the page
+        The bank, working and laptop selection area
+    -->
     <div id='elements'>
         <div id='bank'>
             <h2>Joe Banker</h2>
@@ -33,12 +36,17 @@
             <button id="work-btn">Work</button>
         </div>
 
-        <div id='laptop'>
+        <div id='laptopObject'>
             <h2>Laptops</h2>
             <select name="laptops" id="laptops">
             </select>
+            <h3>Features:</h3>
+            <p id="laptop-specs"></p>
         </div>
     </div>
+
+    <!-- This section is for displaying the information about the laptops -->
+    <!-- TODO: Add image section for pictures of the laptops -->
     <div id="infoSection">
         <h3 id="laptop-name">Laptopname: </h3>
         <p id="laptop-desc">Lorem ipsum dolor sit amet, consectetur adipisicing</p>
@@ -46,8 +54,8 @@
         <br/>
         <button id="buy-btn">Buy now</button>
     </div>
-
-        
-<script src="app.js"></script>
+    
+    <!-- Adding the javascript to the page functionality --> 
+    <script src="app.js"></script>
 </body>
 </html>
