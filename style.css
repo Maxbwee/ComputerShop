@@ -44,8 +44,8 @@ height: 20px;
 }
 
 #laptop-price{
-    float:right;
-    
+    text-align: right;
+    margin-bottom: 20px; 
 }
 
 #buy-btn{
@@ -55,4 +55,18 @@ height: 20px;
 #laptop-specs{    
     width: 400px;
     height: 150px;
+}
+
+#laptop-name{
+    text-align: center;
+}
+
+#laptop-desc{
+    text-align: center;
+}
+
+#laptop-img{
+    
+    height: 200px;
+    width: 200px;
 }
