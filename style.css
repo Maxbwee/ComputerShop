@@ -36,10 +36,10 @@ height: 20px;
 
 #infoSection {
  padding: 2em;
- margin: 100px;
  border: 2px;
  border-radius: 25px;
  background-color: lightgray;
+ margin-top: 20px;
 
 }
 
@@ -50,4 +50,9 @@ height: 20px;
 
 #buy-btn{
     float:right;
+}
+
+#laptop-specs{    
+    width: 400px;
+    height: 150px;
 }

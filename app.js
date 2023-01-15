@@ -1,4 +1,5 @@
 const laptopsElement = document.getElementById("laptops");
+const laptopSpecsElement = document.getElementById("laptop-specs");
 const workBalanceElement = document.getElementById("work-balance");
 const bankBalanceElement = document.getElementById("bank-balance");
 const workButtonElement = document.getElementById("work-btn");
@@ -21,6 +22,7 @@ fetch("https://hickory-quilled-actress.glitch.me/computers")
 
 const addLaptops = (laptops) => {
     laptops.forEach(x => addLaptopDropDown(x));
+    laptopSpecsElement.innerText = laptops[0].specs.join('\n');
 }
 
 const addLaptopDropDown = (laptop) => {
@@ -30,3 +32,11 @@ const addLaptopDropDown = (laptop) => {
     laptopsElement.appendChild(laptopElement);
 
 }
+
+const handleLaptopChange = e => {
+    const selectedLaptop = laptops[e.target.selectedIndex]
+    laptopSpecsElement.innerText = selectedLaptop.specs.join('\n');
+
+}
+
+laptopsElement.addEventListener("change", handleLaptopChange);
