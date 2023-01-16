@@ -18,7 +18,7 @@ let laptops = [];
 let workBalance = 0;
 let bankBalance = 0;
 let price = 0;
-let currentLoanAmount = 0;
+let currentLoanAmount = 0.0;
 
 // Function for fetching all laptops from the API
 fetch("https://hickory-quilled-actress.glitch.me/computers")
@@ -120,6 +120,7 @@ const handleLoan = () => {
         alert("You do not meet the requirements of taking a loan")
     }
 
+
     getLoanAmount();
     changeLoanOnScreen();
     
@@ -129,6 +130,28 @@ const handleLoan = () => {
 const handleRepayLoan = () => {
 
 }
+
+const buyLaptop = () => {
+
+    const selectedLaptop = laptops[laptopsElement.selectedIndex];
+    const laptopName = selectedLaptop.title;
+    
+    const totalPrice = selectedLaptop.price;
+    
+    if(bankBalance >= totalPrice) {
+        alert(`You are now the owner of ${laptopName}`)
+        const newBalance = bankBalance -= totalPrice
+        changeBalanceAfterBuy(newBalance);
+        console.log(newBalance);    
+    } else {
+        alert(`You do not have enough money! You need to work more`)
+    }
+
+    
+}
+
+
+
 
 
 // Function to reset the users work balance amount
@@ -150,6 +173,11 @@ const changeBankBalanceAmount = () => {
     bankBalanceElement.innerText = `${totalBankBalance} €`
 }
 
+const changeBalanceAfterBuy = (newBalance) => {
+
+    bankBalanceElement.innerText = `${newBalance} €`
+}
+
 const changeLoanOnScreen = () => {
     
     outstandingLoanElement.innerText = `Current loan amount ${currentLoanAmount.toFixed(2)} €`
@@ -169,3 +197,4 @@ laptopsElement.addEventListener("change", handleLaptopChange);
 workButtonElement.addEventListener("click", handleWorkBtn);
 bankButtonElement.addEventListener("click", handleBankBtn);
 loanButtonElement.addEventListener("click", handleLoan);
+buyButtonElement.addEventListener("click", buyLaptop);
