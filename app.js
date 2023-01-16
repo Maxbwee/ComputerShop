@@ -65,8 +65,6 @@ const handleWorkBtn = () => {
  const workBalanceTotal = workBalance;
  
  workBalanceElement.innerText = `${workBalanceTotal} €`
-
-
 }
 
 
@@ -75,12 +73,11 @@ const handleWorkBtn = () => {
 
 const handleBankBtn = () => {
 
-    const bankBalanceTotal = bankBalance + workBalance ;
     const loanAmount = currentLoanAmount;
-
-    if(currentLoanAmount > 0) {
+    
+    if(loanAmount > 0) {
         const payLoan = bankBalanceTotal * 0.1;
-
+        
         bankBalanceTotal -= payLoan;
         if(payLoan > loanAmount) {
             bankBalanceTotal += (payLoan - loanAmount);
@@ -88,12 +85,9 @@ const handleBankBtn = () => {
             currentLoanAmount = loanAmount - payLoan;
         }
     }
+    
 
-    const totalBankBalance = bankBalanceTotal;
-
-    bankBalanceElement.innerText = `${totalBankBalance}  €`
-
-
+    changeBankBalanceAmount();
     resetWorkBalance();
 }
 
@@ -106,7 +100,7 @@ const handleLoan = () => {
     
     if (currentLoanAmount <= 0 && bankBalance * 2 >= totalLoan) {
         currentLoanAmount += totalLoan;
-        changeBalanceAmount(totalLoan);
+        changeBankBalanceAmount(bankBalance + totalLoan);
     } else {
         alert("You do not meet the requirements of taking a loan")
     }
@@ -125,6 +119,12 @@ const changeBalanceAmount = () => {
    const addLoan = totalLoan + bankBalance;
    bankBalanceElement.innerText = `${addLoan} €`; 
 
+}
+
+// function to change the bankbalance when clicking bank button
+const changeBankBalanceAmount = () => {
+   let totalBankBalance = (bankBalance += workBalance)
+    bankBalanceElement.innerText = `${totalBankBalance} €`
 }
 
 // Event listeners for every element
