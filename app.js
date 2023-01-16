@@ -70,23 +70,26 @@ const handleWorkBtn = () => {
 }
 
 
-// Function for adding the work amount to the bank balance
+// Function for adding the work amount to the bank balance 
+// should also check for outstanding loan
 
 const handleBankBtn = () => {
 
-    const bankBalanceTotal = bankBalance;
+    const bankBalanceTotal = bankBalance + workBalance ;
     const loanAmount = currentLoanAmount;
 
-    if(loanAmount > 0) {
+    if(currentLoanAmount > 0) {
         const payLoan = bankBalanceTotal * 0.1;
-        bankBalanceTotal - payLoan;
+
+        bankBalanceTotal -= payLoan;
         if(payLoan > loanAmount) {
             bankBalanceTotal += (payLoan - loanAmount);
-
+        } else {
+            currentLoanAmount = loanAmount - payLoan;
         }
     }
 
-    const totalBankBalance = bankBalanceTotal + workBalance;
+    const totalBankBalance = bankBalanceTotal;
 
     bankBalanceElement.innerText = `${totalBankBalance}  €`
 
