@@ -5,6 +5,7 @@ const bankBalanceElement = document.getElementById("bank-balance");
 const workButtonElement = document.getElementById("work-btn");
 const bankButtonElement = document.getElementById("bank-btn");
 const loanButtonElement = document.getElementById("loan-btn");
+const repayLoanButtonElement = document.getElementById("repay-loan-btn");
 const buyButtonElement = document.getElementById("buy-btn");
 const laptopNameElement = document.getElementById("laptop-name");
 const laptopDescElement = document.getElementById("laptop-desc");
@@ -68,7 +69,7 @@ const handleWorkBtn = () => {
 }
 
 
-// Function for adding the work amount to the bank balance 
+// Function for adding the work balance amount to the bank balance 
 // should also check for outstanding loan
 
 const handleBankBtn = () => {
@@ -76,13 +77,13 @@ const handleBankBtn = () => {
     const loanAmount = currentLoanAmount;
     
     if(loanAmount > 0) {
-        const payLoan = bankBalanceTotal * 0.1;
-        
-        bankBalanceTotal -= payLoan;
+        const payLoan = bankBalance * 0.1;
+        bankBalance -= payLoan;
         if(payLoan > loanAmount) {
-            bankBalanceTotal += (payLoan - loanAmount);
+            bankBalance += (payLoan - loanAmount);
+            changeLoanAmount(0);
         } else {
-            currentLoanAmount = loanAmount - payLoan;
+            changeLoanAmount(loanAmount - payLoan);
         }
     }
     
@@ -92,8 +93,22 @@ const handleBankBtn = () => {
 }
 
 
+// Changes the loan amount on screen
+const changeLoanAmount = newLoanAmount => {
+    currentLoanAmount = newLoanAmount;
+    changeLoanOnScreen();
+    if(currentLoanAmount <= 0) {
+        outstandingLoanElement.style.display = "none";
+        showRepayLoanButton();
+    }
+}
+
+// Gets the current loan amount due
+const getLoanAmount = () => currentLoanAmount;
+
 // Function for taking a loan. It should check that you may not take a loan if you already have one
 // and it should check that the loan amount is not double the total salary
+
 const handleLoan = () => {
 
     const totalLoan = prompt("Please enter how much money you would like to loan: ");
@@ -105,7 +120,14 @@ const handleLoan = () => {
         alert("You do not meet the requirements of taking a loan")
     }
 
-    outstandingLoanElement.innerText = `Total loan amount: ${totalLoan} €`
+    getLoanAmount();
+    changeLoanOnScreen();
+    
+    outstandingLoanElement.innerText = `Current loan amount: ${parseInt(totalLoan).toFixed(2)} €`
+}
+
+const handleRepayLoan = () => {
+
 }
 
 
@@ -115,8 +137,9 @@ const resetWorkBalance = () => {
     workBalanceElement.innerText = `${workBalance} €`
 }
 // function to add the loan amount to the users bank balance
-const changeBalanceAmount = () => {
-   const addLoan = totalLoan + bankBalance;
+const changeBalanceAmount = (totalLoan) => {
+   const addLoan = (totalLoan += bankBalance);
+   
    bankBalanceElement.innerText = `${addLoan} €`; 
 
 }
@@ -125,6 +148,20 @@ const changeBalanceAmount = () => {
 const changeBankBalanceAmount = () => {
    let totalBankBalance = (bankBalance += workBalance)
     bankBalanceElement.innerText = `${totalBankBalance} €`
+}
+
+const changeLoanOnScreen = () => {
+    
+    outstandingLoanElement.innerText = `Current loan amount ${currentLoanAmount.toFixed(2)} €`
+}
+
+
+const showRepayLoanButton = () => {
+    if(outstandingLoanElement.style.display === "inline") {
+        repayLoanButtonElement.style.display = "none";
+    } else {
+        repayLoanButtonElement.style.display === "inline";
+    }
 }
 
 // Event listeners for every element

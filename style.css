@@ -82,3 +82,14 @@ height: 400px;
     height: 200px;
     width: 200px;
 }
+
+#repay-loan-btn{
+    margin-top: 20px;
+
+}
+
+#outstanding-loan{
+    line-height: 100px;
+    
+}
+
