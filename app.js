@@ -129,7 +129,14 @@ const handleLoan = () => {
 
 const handleRepayLoan = () => {
 
+    console.log(workBalance);
 }
+
+
+ // Function to buy selected laptops. If the user doesnt have enough money
+ // The user will be shown an alert message saying they dont have enough money.
+ // If the user has enough money they will be shown a message that they have bought
+ // the selected laptopt and money will be deducted from their bank balance
 
 const buyLaptop = () => {
 
@@ -150,10 +157,6 @@ const buyLaptop = () => {
     
 }
 
-
-
-
-
 // Function to reset the users work balance amount
 const resetWorkBalance = () => {
     workBalance = 0;
@@ -173,17 +176,21 @@ const changeBankBalanceAmount = () => {
     bankBalanceElement.innerText = `${totalBankBalance} €`
 }
 
+// function that handles updating the balance after the user has bought the laptop
 const changeBalanceAfterBuy = (newBalance) => {
 
     bankBalanceElement.innerText = `${newBalance} €`
 }
 
+// function that should show the current loan amount due on screen.
 const changeLoanOnScreen = () => {
     
     outstandingLoanElement.innerText = `Current loan amount ${currentLoanAmount.toFixed(2)} €`
 }
 
 
+// Function that should make the repay loan button appear while there is a loan active.
+// CURRENTLY WIP
 const showRepayLoanButton = () => {
     if(outstandingLoanElement.style.display === "inline") {
         repayLoanButtonElement.style.display = "none";
