@@ -104,7 +104,7 @@ const changeLoanAmount = newLoanAmount => {
 }
 
 // Gets the current loan amount due
-const getLoanAmount = () => currentLoanAmount;
+const getLoanAmount = () => outstandingLoanElement.innerText = `Current loan amount ${currentLoanAmount.toFixed(2)} €`;
 
 // Function for taking a loan. It should check that you may not take a loan if you already have one
 // and it should check that the loan amount is not double the total salary
@@ -123,7 +123,7 @@ const handleLoan = () => {
     getLoanAmount();
     changeLoanOnScreen();
     
-    outstandingLoanElement.innerText = `Current loan amount: ${parseInt(totalLoan).toFixed(2)} €`
+    //outstandingLoanElement.innerText = `Current loan amount: ${parseInt(totalLoan).toFixed(2)} €`
 }
 
 const handleRepayLoan = () => {
