@@ -100,7 +100,7 @@ const handleLoan = () => {
     
     if (currentLoanAmount <= 0 && bankBalance * 2 >= totalLoan) {
         currentLoanAmount += totalLoan;
-        changeBankBalanceAmount(bankBalance + totalLoan);
+        changeBalanceAmount(totalLoan);
     } else {
         alert("You do not meet the requirements of taking a loan")
     }
