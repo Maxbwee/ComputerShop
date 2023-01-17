@@ -69,8 +69,8 @@ const handleWorkBtn = () => {
 
 
 // Function for adding the work balance amount to the bank balance 
-// should also check for outstanding loan
-
+// Checks the loan payment by getting the work balance * 0,1. 
+// After that adds the 0,1 value to the outstanding loan and the rest to the bank balance
 const handleBankBtn = () => {
 
     const loanAmount = currentLoanAmount;
@@ -78,7 +78,6 @@ const handleBankBtn = () => {
     if(loanAmount > 0) {
         const payLoan = workBalance * 0.1;
         bankBalance -= payLoan;
-        alert(bankBalance+' wB-p');
         if(payLoan > loanAmount) {
             bankBalance += (payLoan - loanAmount);
             changeLoanAmount(0);
@@ -86,7 +85,6 @@ const handleBankBtn = () => {
             changeLoanAmount(loanAmount - payLoan);
         }
     }
-    
 
     changeBankBalanceAmount();
     resetWorkBalance();
@@ -94,23 +92,24 @@ const handleBankBtn = () => {
 
 
 // Changes the loan amount on screen
+// If the loan amount reaches 0 by only banking and not pressing RepayLoan button 
+// then the Repay Loan button is hidden through this function
 const changeLoanAmount = newLoanAmount => {
     currentLoanAmount = newLoanAmount;
     changeLoanOnScreen();
     if(currentLoanAmount <= 0) {
         outstandingLoanElement.style.display = "none";
-        showRepayLoanButton();
+        repayLoanButtonElement.style.visibility = "hidden";
+        
     }
 }
 
-// Gets the current loan amount due
-const getLoanAmount = (totalLoan) => outstandingLoanElement.innerText = `Current loan amount ${totalLoan} €`;
 
 // Function for taking a loan. It should check that you may not take a loan if you already have one
 // and it should check that the loan amount is not double the total salary
 
 const handleLoan = () => {
-
+    
     let totalLoan = prompt("Please enter how much money you would like to loan: ");
     
     if (currentLoanAmount <= 0 && bankBalance * 2 >= totalLoan) {
@@ -120,43 +119,53 @@ const handleLoan = () => {
     } else {
         alert("You do not meet the requirements of taking a loan.")
     }
-
-    getLoanAmount(totalLoan);
     
+    getLoanAmount(totalLoan);
+    showRepayLoanButton();
 }
 
+
+// Gets the current loan amount due
+const getLoanAmount = (totalLoan) => outstandingLoanElement.innerText = `Current loan amount ${totalLoan} €`;
+
+// Function that handles the loan payment. If there is any left over it is added to the bank balance
+// If the loan amount reaches 0 the Repay Loan button is hidden.
 const handleRepayLoan = () => {
-
+    
+    
     const leftOver = workBalance - currentLoanAmount;
-
+    
     if(leftOver > 0 ) {
         changeBalanceAmount(leftOver);
         changeLoanAmount(0);
+        repayLoanButtonElement.style.visibility = "hidden";
     } 
     else { 
-            changeLoanAmount(currentLoanAmount - workBalance);
+        changeLoanAmount(currentLoanAmount - workBalance);
+        
     }
     
-        console.log(workBalance);
-        console.log(currentLoanAmount);
-        resetWorkBalance();
-        
-       
-    }
+    console.log(workBalance);
+    console.log(currentLoanAmount);
+    resetWorkBalance();
+    
+}
+
+// Function that should make the repay loan button appear while there is a loan active.
+const showRepayLoanButton = () => {
+    repayLoanButtonElement.style.visibility = "visible";
+}
 
 
-
-
- // Function to buy selected laptops. If the user doesnt have enough money
- // The user will be shown an alert message saying they dont have enough money.
- // If the user has enough money they will be shown a message that they have bought
- // the selected laptopt and money will be deducted from their bank balance
+// Function to buy selected laptops. If the user doesnt have enough money
+// The user will be shown an alert message saying they dont have enough money.
+// If the user has enough money they will be shown a message that they have bought
+// the selected laptopt and money will be deducted from their bank balance
 
 const buyLaptop = () => {
-
+    
     const selectedLaptop = laptops[laptopsElement.selectedIndex];
     const laptopName = selectedLaptop.title;
-    
     const totalPrice = selectedLaptop.price;
     
     if(bankBalance >= totalPrice) {
@@ -167,7 +176,7 @@ const buyLaptop = () => {
     } else {
         alert(`You do not have enough money! You need to work more`)
     }
-
+    
     
 }
 
@@ -187,7 +196,6 @@ const updateBankBalance = (totalLoan) => {
 // function to add the loan amount to the users bank balance
 const changeBalanceAmount = (leftOver) => {
    const addLoan = (leftOver += bankBalance);
-   
    bankBalanceElement.innerText = `${addLoan} €`; 
 
 }
@@ -209,17 +217,6 @@ const changeBalanceAfterBuy = (newBalance) => {
 const changeLoanOnScreen = () => {
     
     outstandingLoanElement.innerText = `Current loan amount ${currentLoanAmount} €`
-}
-
-
-// Function that should make the repay loan button appear while there is a loan active.
-// CURRENTLY WIP
-const showRepayLoanButton = () => {
-    if(outstandingLoanElement.style.display === "inline") {
-        repayLoanButtonElement.style.display = "none";
-    } else {
-        repayLoanButtonElement.style.display === "inline";
-    }
 }
 
 // Event listeners for every element

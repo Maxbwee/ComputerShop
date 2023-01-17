@@ -85,6 +85,7 @@ height: 20px;
 
 #repay-loan-btn{
     margin-top: 20px;
+    visibility: hidden;
 
 }
 
