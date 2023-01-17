@@ -77,12 +77,18 @@ const handleBankBtn = () => {
     const loanAmount = currentLoanAmount;
     
     if(loanAmount > 0) {
-        const payLoan = bankBalance * 0.1;
+        const payLoan = workBalance * 0.1;
+        alert(bankBalance + 'Latest'+payLoan);
         bankBalance -= payLoan;
+        alert(bankBalance+' bB-p');
         if(payLoan > loanAmount) {
             bankBalance += (payLoan - loanAmount);
+            alert(bankBalance);
             changeLoanAmount(0);
         } else {
+            alert(bankBalance+' '+workBalance+' '+payLoan+'-'+(workBalance - payLoan));
+            //bankBalance = bankBalance + (workBalance - payLoan); 
+            alert(bankBalance);
             changeLoanAmount(loanAmount - payLoan);
         }
     }
@@ -187,6 +193,7 @@ const resetWorkBalance = () => {
 
 const updateBankBalance = (totalLoan) => {
     const loanBank = parseInt(totalLoan += bankBalance);
+    bankBalance = loanBank;
     console.log(loanBank);
     console.log(currentLoanAmount);
     bankBalanceElement.innerText = `${loanBank} €`
@@ -205,7 +212,9 @@ const changeWorkBalanceRepayLoan = (newWorkBalance) => {
 
 // function to change the bankbalance when clicking bank button
 const changeBankBalanceAmount = () => {
+    alert(bankBalance+' '+workBalance);
    let totalBankBalance = (bankBalance += workBalance)
+   alert(totalBankBalance);
     bankBalanceElement.innerText = `${totalBankBalance} €`
 }
 
