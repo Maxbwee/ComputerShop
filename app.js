@@ -18,7 +18,7 @@ let laptops = [];
 let workBalance = 0;
 let bankBalance = 0;
 let price = 0;
-let currentLoanAmount = 0.0;
+let currentLoanAmount = 0;
 
 // Function for fetching all laptops from the API
 fetch("https://hickory-quilled-actress.glitch.me/computers")
@@ -111,11 +111,11 @@ const getLoanAmount = (totalLoan) => outstandingLoanElement.innerText = `Current
 
 const handleLoan = () => {
 
-    const totalLoan = prompt("Please enter how much money you would like to loan: ");
+    let totalLoan = prompt("Please enter how much money you would like to loan: ");
     
     if (currentLoanAmount <= 0 && bankBalance * 2 >= totalLoan) {
         currentLoanAmount += totalLoan;
-        changeBalanceAmount(currentLoanAmount);
+        changeBalanceAmount(totalLoan);
     } else {
         alert("You do not meet the requirements of taking a loan")
     }
@@ -129,7 +129,17 @@ const handleLoan = () => {
 
 const handleRepayLoan = () => {
 
+    
+
+    if(workBalance >= currentLoanAmount){
+       const newWorkBalance = workBalance -= currentLoanAmount;
+       changeWorkBalanceRepayLoan(newWorkBalance);
+       changeLoanOnScreen(currentLoanAmount);
+    }
+
     console.log(workBalance);
+    console.log(currentLoanAmount);
+
 }
 
 
@@ -170,6 +180,10 @@ const changeBalanceAmount = (currentLoanAmount) => {
 
 }
 
+const changeWorkBalanceRepayLoan = (newWorkBalance) => {
+    workBalanceElement.innerText = `${newWorkBalance}`
+}
+
 // function to change the bankbalance when clicking bank button
 const changeBankBalanceAmount = () => {
    let totalBankBalance = (bankBalance += workBalance)
@@ -185,7 +199,7 @@ const changeBalanceAfterBuy = (newBalance) => {
 // function that should show the current loan amount due on screen.
 const changeLoanOnScreen = () => {
     
-    outstandingLoanElement.innerText = `Current loan amount ${currentLoanAmount.toFixed(2)} €`
+    outstandingLoanElement.innerText = `Current loan amount ${currentLoanAmount} €`
 }
 
 
@@ -205,3 +219,4 @@ workButtonElement.addEventListener("click", handleWorkBtn);
 bankButtonElement.addEventListener("click", handleBankBtn);
 loanButtonElement.addEventListener("click", handleLoan);
 buyButtonElement.addEventListener("click", buyLaptop);
+repayLoanButtonElement.addEventListener("click", handleRepayLoan);
