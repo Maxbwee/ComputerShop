@@ -132,9 +132,10 @@ const handleRepayLoan = () => {
     
 
     if(workBalance >= currentLoanAmount){
-       const newWorkBalance = workBalance -= currentLoanAmount;
+       const newWorkBalance = (workBalance -= currentLoanAmount);
+       const repayingLoan = currentLoanAmount - workBalance;
        changeWorkBalanceRepayLoan(newWorkBalance);
-       changeLoanOnScreen(currentLoanAmount);
+       changeLoanAmount(repayingLoan);
     }
 
     console.log(workBalance);
@@ -181,7 +182,7 @@ const changeBalanceAmount = (currentLoanAmount) => {
 }
 
 const changeWorkBalanceRepayLoan = (newWorkBalance) => {
-    workBalanceElement.innerText = `${newWorkBalance}`
+    workBalanceElement.innerText = `${newWorkBalance} €`
 }
 
 // function to change the bankbalance when clicking bank button
