@@ -104,7 +104,7 @@ const changeLoanAmount = newLoanAmount => {
 }
 
 // Gets the current loan amount due
-const getLoanAmount = () => outstandingLoanElement.innerText = `Current loan amount ${currentLoanAmount.toFixed(2)} €`;
+const getLoanAmount = (totalLoan) => outstandingLoanElement.innerText = `Current loan amount ${totalLoan} €`;
 
 // Function for taking a loan. It should check that you may not take a loan if you already have one
 // and it should check that the loan amount is not double the total salary
@@ -115,14 +115,14 @@ const handleLoan = () => {
     
     if (currentLoanAmount <= 0 && bankBalance * 2 >= totalLoan) {
         currentLoanAmount += totalLoan;
-        changeBalanceAmount(totalLoan);
+        changeBalanceAmount(currentLoanAmount);
     } else {
         alert("You do not meet the requirements of taking a loan")
     }
 
 
-    getLoanAmount();
-    changeLoanOnScreen();
+    getLoanAmount(totalLoan);
+    //changeLoanOnScreen();
     
     //outstandingLoanElement.innerText = `Current loan amount: ${parseInt(totalLoan).toFixed(2)} €`
 }
@@ -163,8 +163,8 @@ const resetWorkBalance = () => {
     workBalanceElement.innerText = `${workBalance} €`
 }
 // function to add the loan amount to the users bank balance
-const changeBalanceAmount = (totalLoan) => {
-   const addLoan = (totalLoan += bankBalance);
+const changeBalanceAmount = (currentLoanAmount) => {
+   const addLoan = (currentLoanAmount += bankBalance);
    
    bankBalanceElement.innerText = `${addLoan} €`; 
 
