@@ -17,7 +17,6 @@ const outstandingLoanElement = document.getElementById("outstanding-loan");
 let laptops = []; 
 let workBalance = 0;
 let bankBalance = 0;
-let price = 0;
 let currentLoanAmount = 0;
 
 // Function for fetching all laptops from the API
@@ -78,17 +77,12 @@ const handleBankBtn = () => {
     
     if(loanAmount > 0) {
         const payLoan = workBalance * 0.1;
-        alert(bankBalance + 'Latest'+payLoan);
         bankBalance -= payLoan;
-        alert(bankBalance+' bB-p');
+        alert(bankBalance+' wB-p');
         if(payLoan > loanAmount) {
             bankBalance += (payLoan - loanAmount);
-            alert(bankBalance);
             changeLoanAmount(0);
         } else {
-            alert(bankBalance+' '+workBalance+' '+payLoan+'-'+(workBalance - payLoan));
-            //bankBalance = bankBalance + (workBalance - payLoan); 
-            alert(bankBalance);
             changeLoanAmount(loanAmount - payLoan);
         }
     }
@@ -124,14 +118,11 @@ const handleLoan = () => {
         updateBankBalance(parseInt(totalLoan));
         console.log(currentLoanAmount);
     } else {
-        alert("You do not meet the requirements of taking a loan")
+        alert("You do not meet the requirements of taking a loan.")
     }
 
-
     getLoanAmount(totalLoan);
-    //changeLoanOnScreen();
     
-    //outstandingLoanElement.innerText = `Current loan amount: ${parseInt(totalLoan).toFixed(2)} €`
 }
 
 const handleRepayLoan = () => {
@@ -146,15 +137,10 @@ const handleRepayLoan = () => {
             changeLoanAmount(currentLoanAmount - workBalance);
     }
     
-
-        resetWorkBalance();
         console.log(workBalance);
         console.log(currentLoanAmount);
-       // (workBalance >= currentLoanAmount){
-       //const newWorkBalance = (workBalance - currentLoanAmount);
-       //const repayingLoan = currentLoanAmount - workBalance;
-       //changeWorkBalanceRepayLoan(newWorkBalance);
-       //changeLoanAmount(repayingLoan);
+        resetWorkBalance();
+        
        
     }
 
@@ -206,15 +192,10 @@ const changeBalanceAmount = (leftOver) => {
 
 }
 
-const changeWorkBalanceRepayLoan = (newWorkBalance) => {
-    workBalanceElement.innerText = `${newWorkBalance}`
-}
 
 // function to change the bankbalance when clicking bank button
 const changeBankBalanceAmount = () => {
-    alert(bankBalance+' '+workBalance);
-   let totalBankBalance = (bankBalance += workBalance)
-   alert(totalBankBalance);
+    let totalBankBalance = (bankBalance += workBalance)
     bankBalanceElement.innerText = `${totalBankBalance} €`
 }
 
